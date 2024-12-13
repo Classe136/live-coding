@@ -1,8 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import HeaderComponent from "./components/HeaderComponent";
 
 function App() {
-  return <h1 className="text-center">Hello World</h1>;
+  return (
+    <>
+      <HeaderComponent />
+    </>
+  );
 }
 
 export default App;
