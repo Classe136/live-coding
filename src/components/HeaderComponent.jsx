@@ -1,7 +1,7 @@
 function HeaderComponent() {
   return (
-    <header>
-      <h1>{`Sono l' HEADER!`}</h1>
+    <header className="p-4">
+      <h1 className="text-center">Il mio blog</h1>
     </header>
   );
 }
