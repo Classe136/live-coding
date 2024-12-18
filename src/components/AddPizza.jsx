@@ -1,7 +1,8 @@
 import { ingredients } from "../data/pizzas";
 function AddPizza({ handleSubmit, handleInput, handleIngredients, formData }) {
   const ingredientList = ingredients();
-
+  //mostrare funzione per ripassare oggetto verso il padre e tenere nel parent
+  // solo l'array e la funzione submit
   return (
     <section className="my-4">
       <h2>Aggiungi nuova pizza</h2>
