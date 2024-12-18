@@ -15,7 +15,7 @@ function MainComponent() {
   const [menu, setMenu] = useState(pizzas);
   const [formData, setFormData] = useState(newPizza);
 
-  //PER IL FILTRO NON è NECESSARIO useEffect perchè quando il componente viene rieseguito all'aggiornamento della variabile search viene ricreata anche la const filteredMenu sulla quaale cicleremo nell'array infatti filterdMenu è una variabile che si basa su due altre variabili di stato -- menu e search --
+  //PER IL FILTRO NON è NECESSARIO useEffect perchè quando il componente viene rieseguito all'aggiornamento della variabile search viene ricreata anche la const filteredMenu sulla quale cicleremo nell'array infatti filterdMenu è una variabile che si basa su due altre variabili di stato -- menu e search -- quindi non va impostata come variabile di stato e non è necessario useEffect per calcolarla
   const filteredMenu = filterItems(menu, search);
 
   useEffect(() => {
