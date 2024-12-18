@@ -20,6 +20,9 @@ function MainComponent() {
 
   useEffect(() => {
     console.log("La variabile è cambiata");
+
+    //cleanup
+    return () => console.log("cleanup");
   }, [formData.avaiable]);
   function deleteItem(id) {
     setMenu(menu.filter((el) => el.id !== id));

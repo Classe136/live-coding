@@ -59,6 +59,7 @@ function AddPizza({ handleSubmit, handleInput, handleIngredients, formData }) {
                 name="ingredients"
                 onChange={handleIngredients}
                 value={ingredient}
+                checked={formData.ingredients.includes(ingredient)}
               />
               <label className="form-check-label" htmlFor="avaiable">
                 {ingredient}
@@ -74,6 +75,7 @@ function AddPizza({ handleSubmit, handleInput, handleIngredients, formData }) {
             name="avaiable"
             onChange={handleInput}
             value={formData.avaiable}
+            checked={formData.avaiable}
           />
           <label className="form-check-label" htmlFor="avaiable">
             Disponibile

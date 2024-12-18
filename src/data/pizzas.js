@@ -59,8 +59,8 @@ function ingredients() {
   return ingredientsList;
 }
 function filterItems(items, query) {
-  //query = query.toLowerCase();
-  return items.filter((item) => item.name.includes(query));
+  query = query.toLowerCase();
+  return items.filter((item) => item.name.toLowerCase().includes(query));
 }
 export { pizzas, ingredients, filterItems };
 
