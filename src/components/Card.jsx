@@ -16,20 +16,22 @@ function Card({
   title,
   badge,
   description = "Descrizione non presente",
+  onDelete,
 }) {
   const [pippo, setPippo] = useState(false);
 
-  const [numero, setNumero] = useState(10);
+  // const [numero, setNumero] = useState(10);
   function toggleActive() {
     setPippo(!pippo);
+    console.log(pippo);
   }
-  function incr(e) {
-    e.stopPropagation();
-    setNumero(numero + 100);
-  }
+  // function incr(e) {
+  //   e.stopPropagation();
+  //   setNumero(numero + 100);
+  // }
   return (
     <div
-      className={`card ${style.cardEffec} ${pippo ? style.isActive : ""}`}
+      className={`card ${style.cardEffect} ${pippo ? style.isActive : ""}`}
       onClick={toggleActive}
     >
       <img
@@ -41,9 +43,9 @@ function Card({
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{description}</p>
         <div>{badge}</div>
-        <div>{numero}</div>
+        {/* <div>{numero}</div> */}
         <Button />
-        <button onClick={incr}>Incrementa</button>
+        <button onClick={onDelete}>Delete</button>
       </div>
     </div>
   );
