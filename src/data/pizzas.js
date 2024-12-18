@@ -47,7 +47,22 @@ const pizzas = [
   },
 ];
 
-export default pizzas;
+function ingredients() {
+  let ingredientsList = [];
+  pizzas.forEach((el) => {
+    el.ingredients.forEach((ingredient) => {
+      if (!ingredientsList.includes(ingredient)) {
+        ingredientsList.push(ingredient);
+      }
+    });
+  });
+  return ingredientsList;
+}
+function filterItems(items, query) {
+  //query = query.toLowerCase();
+  return items.filter((item) => item.name.includes(query));
+}
+export { pizzas, ingredients, filterItems };
 
 // const baseUrl = "https://jsonplaceholder.typicode.com/";
 // const resource = "photos";//

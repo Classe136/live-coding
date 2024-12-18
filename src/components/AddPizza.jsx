@@ -1,4 +1,7 @@
-function AddPizza({ handleSubmit, handleInput, formData }) {
+import { ingredients } from "../data/pizzas";
+function AddPizza({ handleSubmit, handleInput, handleIngredients, formData }) {
+  const ingredientList = ingredients();
+
   return (
     <section className="my-4">
       <h2>Aggiungi nuova pizza</h2>
@@ -45,6 +48,23 @@ function AddPizza({ handleSubmit, handleInput, formData }) {
             onChange={handleInput}
             name="price"
           />
+        </div>
+        <div className="card p-4">
+          {ingredientList.map((ingredient) => (
+            <div className="mb-3 form-check" key={ingredient}>
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="ingredients"
+                name="ingredients"
+                onChange={handleIngredients}
+                value={ingredient}
+              />
+              <label className="form-check-label" htmlFor="avaiable">
+                {ingredient}
+              </label>
+            </div>
+          ))}
         </div>
         <div className="mb-3 form-check">
           <input
