@@ -48,3 +48,8 @@ const pizzas = [
 ];
 
 export default pizzas;
+
+// const baseUrl = "https://jsonplaceholder.typicode.com/";
+// const resource = "photos";//
+// const num = 6;
+// const params = { "_limit": num };
