@@ -1,6 +1,18 @@
 body {
-    background-color: #E5E5E5;
+    /* background-image: linear-gradient(to left,
+            transparent 0px,
+            transparent 20px,
+            rgba(0, 0, 0, 0.2) 20px,
+            rgba(0, 0, 0, 0.2) 40px),
+
+        linear-gradient(to bottom,
+            transparent 0px,
+            transparent 20px,
+            rgba(0, 0, 0, 0.2) 20px,
+            rgba(0, 0, 0, 0.2) 40px);
+    background-size: 40px, 100% 40px; */
 }
+
 
 footer {
     background-color: #333333;

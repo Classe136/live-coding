@@ -1,12 +1,72 @@
-import { ingredients } from "../data/pizzas";
-function AddPizza({ handleSubmit, handleInput, handleIngredients, formData }) {
-  const ingredientList = ingredients();
+import { useState, useEffect } from "react";
+import axios from "axios";
+//import { ingredients } from "../data/pizzas";
+const newPizza = {
+  name: "",
+  image: "",
+  price: "",
+  avaiable: false,
+  ingredients: [],
+};
+const apiUrl = "http://localhost:3000";
+function AddPizza({ handleSubmit }) {
+  const [formData, setFormData] = useState(newPizza);
+  const [ingredientList, setIngredientList] = useState([]);
+
+  useEffect(() => {
+    //console.log("E' stato eseguito use effect");
+    getIngredients();
+
+    //return () => console.log("cleanup");
+  }, []);
+
+  function getIngredients() {
+    axios
+      .get(apiUrl + "/ingredients")
+      .then((res) => {
+        console.log(res.data);
+        setIngredientList(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        // always executed
+      });
+  }
   //mostrare funzione per ripassare oggetto verso il padre e tenere nel parent
   // solo l'array e la funzione submit
+  function handleInput(e) {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
+  }
+  function handleIngredients(e) {
+    setFormData((formData) => {
+      let { ingredients, ...others } = formData;
+      if (ingredients.includes(e.target.value)) {
+        ingredients = ingredients.filter((val) => val !== e.target.value);
+      } else {
+        ingredients = [...ingredients, e.target.value];
+      }
+      return {
+        ingredients,
+        ...others,
+      };
+    });
+  }
+  function addPizza(e) {
+    e.preventDefault();
+    //no id ce lo rstituisce il backend
+    //handleSubmit({ ...formData, id: self.crypto.randomUUID() });
+    handleSubmit({ ...formData });
+    setFormData(newPizza);
+  }
+  //
   return (
     <section className="my-4">
       <h2>Aggiungi nuova pizza</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addPizza}>
         <div className="mb-3">
           <label htmlFor="username" className="form-label">
             Your name
@@ -52,18 +112,18 @@ function AddPizza({ handleSubmit, handleInput, handleIngredients, formData }) {
         </div>
         <div className="card p-4">
           {ingredientList.map((ingredient) => (
-            <div className="mb-3 form-check" key={ingredient}>
+            <div className="mb-3 form-check" key={ingredient.id}>
               <input
                 type="checkbox"
                 className="form-check-input"
                 id="ingredients"
                 name="ingredients"
                 onChange={handleIngredients}
-                value={ingredient}
-                checked={formData.ingredients.includes(ingredient)}
+                value={ingredient.title}
+                checked={formData.ingredients.includes(ingredient.title)}
               />
               <label className="form-check-label" htmlFor="avaiable">
-                {ingredient}
+                {ingredient.title}
               </label>
             </div>
           ))}
