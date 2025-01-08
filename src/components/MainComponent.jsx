@@ -107,11 +107,7 @@ function MainComponent() {
             )
           : "Non ci sono pizze"}
       </div>
-      <ul>
-        {/* {characters.map((char) => (
-          <li key={char.id}>{char.name}</li>
-        ))} */}
-      </ul>
+
       <AddPizza handleSubmit={handleSubmit} />
     </main>
   );

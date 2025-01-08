@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "./Button.jsx";
+
 import style from "./Card.module.css";
 /**
  * Renders a card component with an image, title, badge, and description.
@@ -18,20 +18,17 @@ function Card({
   description = "Descrizione non presente",
   onDelete,
 }) {
-  const [pippo, setPippo] = useState(false);
+  const [border, setBorder] = useState(false);
 
   // const [numero, setNumero] = useState(10);
   function toggleActive() {
-    setPippo(!pippo);
-    console.log(pippo);
+    setBorder(!border);
+    console.log(border);
   }
-  // function incr(e) {
-  //   e.stopPropagation();
-  //   setNumero(numero + 100);
-  // }
+
   return (
     <div
-      className={`card ${style.cardEffect} ${pippo ? style.isActive : ""}`}
+      className={`card ${style.cardEffect} ${border ? style.isActive : ""}`}
       onClick={toggleActive}
     >
       <img
@@ -43,8 +40,6 @@ function Card({
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{description}</p>
         <div>{badge}</div>
-        {/* <div>{numero}</div> */}
-        <Button />
         <button onClick={onDelete}>Delete</button>
       </div>
     </div>
