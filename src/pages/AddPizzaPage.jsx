@@ -8,7 +8,7 @@ const newPizza = {
   avaiable: false,
   ingredients: [],
 };
-const apiUrl = "http://localhost:3000";
+const apiUrl = import.meta.env.VITE_API;
 function AddPizza() {
   const [formData, setFormData] = useState(newPizza);
   const [ingredientList, setIngredientList] = useState([]);
@@ -60,7 +60,7 @@ function AddPizza() {
     e.preventDefault();
     //no id ce lo rstituisce il backend
     //handleSubmit({ ...formData, id: self.crypto.randomUUID() });
-    axios.post(apiUrl + "/examples", formData).then((res) => {
+    axios.post(apiUrl + "/pizzas", formData).then((res) => {
       console.log(res.data);
     });
     setFormData(newPizza);

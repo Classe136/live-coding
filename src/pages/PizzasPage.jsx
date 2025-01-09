@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
+
 import axios from "axios";
 
 import Card from "../components/Card.jsx";
@@ -34,7 +34,7 @@ function MainComponent() {
       };
     }
     axios
-      .get(apiUrl + "/examples", options)
+      .get(apiUrl + "/pizzas", options)
       .then((res) => {
         console.log(res.data);
         setMenu(res.data.data);
