@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -68,6 +69,7 @@ function MainComponent() {
     <section className="container">
       <h1>Lista delle pizze</h1>
       <div className="row gy-4">
+        <div className="col-12 py-4"></div>
         <div className="col-12 py-4">
           <Link to="/pizzas/create" className="btn btn-success">
             Aggiungi nuova pizza
