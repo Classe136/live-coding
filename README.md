@@ -41,3 +41,7 @@ rules: {
 
 
 ```
+## Installazione Router
+```bash
+  npm install react-router-dom
+```

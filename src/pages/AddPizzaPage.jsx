@@ -9,7 +9,7 @@ const newPizza = {
   ingredients: [],
 };
 const apiUrl = "http://localhost:3000";
-function AddPizza({ handleSubmit }) {
+function AddPizza() {
   const [formData, setFormData] = useState(newPizza);
   const [ingredientList, setIngredientList] = useState([]);
 
@@ -55,16 +55,19 @@ function AddPizza({ handleSubmit }) {
       };
     });
   }
+
   function addPizza(e) {
     e.preventDefault();
     //no id ce lo rstituisce il backend
     //handleSubmit({ ...formData, id: self.crypto.randomUUID() });
-    handleSubmit({ ...formData });
+    axios.post(apiUrl + "/examples", formData).then((res) => {
+      console.log(res.data);
+    });
     setFormData(newPizza);
   }
   //
   return (
-    <section className="my-4">
+    <section className="my-4 container">
       <h2>Aggiungi nuova pizza</h2>
       <form onSubmit={addPizza}>
         <div className="mb-3">

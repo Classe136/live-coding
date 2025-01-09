@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-import Card from "./Card.jsx";
-import AddPizza from "./AddPizza.jsx";
+import Card from "../components/Card.jsx";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -62,18 +61,18 @@ function MainComponent() {
       });
   }
 
-  function handleSubmit(formData) {
-    axios.post(apiUrl + "/examples", formData).then((res) => {
-      console.log(res.data);
-      setMenu([...menu, res.data]);
-    });
-  }
   function handleSearch(e) {
     setSearch(e.target.value);
   }
   return (
-    <main className="container">
+    <section className="container">
+      <h1>Lista delle pizze</h1>
       <div className="row gy-4">
+        <div className="col-12 py-4">
+          <Link to="/pizzas/create" className="btn btn-success">
+            Aggiungi nuova pizza
+          </Link>
+        </div>
         <div className="col-12 py-4">
           <label htmlFor="search" className="form-label">
             Cerca
@@ -100,6 +99,7 @@ function MainComponent() {
                       title={pizza.name}
                       description={pizza.ingredients.join(", ")}
                       badge={pizza.price + " €"}
+                      id={pizza.id}
                       onDelete={() => deleteItem(pizza.id)}
                     />
                   </div>
@@ -107,9 +107,7 @@ function MainComponent() {
             )
           : "Non ci sono pizze"}
       </div>
-
-      <AddPizza handleSubmit={handleSubmit} />
-    </main>
+    </section>
   );
 }
 export default MainComponent;

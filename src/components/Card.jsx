@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 /**
  * Renders a card component with an image, title, badge, and description.
@@ -16,6 +16,7 @@ function Card({
   title,
   badge,
   description = "Descrizione non presente",
+  id,
   onDelete,
 }) {
   const [border, setBorder] = useState(false);
@@ -40,6 +41,7 @@ function Card({
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{description}</p>
         <div>{badge}</div>
+        <Link to={`/pizzas/${id}`}>Vedi dettaglio</Link>
         <button onClick={onDelete}>Delete</button>
       </div>
     </div>
