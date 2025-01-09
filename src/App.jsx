@@ -28,11 +28,6 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-    // <>
-    //   <HeaderComponent />
-    //   <MainComponent />
-    //   <FooterComponent />
-    // </>
   );
 }
 
