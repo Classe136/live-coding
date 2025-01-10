@@ -8,7 +8,7 @@ const newPizza = {
   avaiable: false,
   ingredients: [],
 };
-const apiUrl = import.meta.env.VITE_API;
+const apiUrl = import.meta.env.VITE_API_URL;
 function AddPizza() {
   const [formData, setFormData] = useState(newPizza);
   const [ingredientList, setIngredientList] = useState([]);

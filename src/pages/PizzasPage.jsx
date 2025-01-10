@@ -49,7 +49,7 @@ function MainComponent() {
   }
   function deleteItem(id) {
     axios
-      .delete(apiUrl + "/examples/" + id)
+      .delete(apiUrl + "/pizzas/" + id)
       .then((res) => {
         console.log(res.data);
         setMenu(menu.filter((el) => el.id !== id));
