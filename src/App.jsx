@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -11,6 +11,7 @@ import AddPizzaPage from "./pages/AddPizzaPage";
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import PizzaPage from "./pages/PizzaPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -24,8 +25,10 @@ function App() {
             <Route index Component={PizzasPage}></Route>
             <Route path=":id" Component={PizzaPage}></Route>
             <Route path="create" Component={AddPizzaPage}></Route>
+            <Route path="ricette" element={<Navigate to="/pizzas" />} />
           </Route>
         </Route>
+        <Route path="*" Component={NotFoundPage} />
       </Routes>
     </BrowserRouter>
   );

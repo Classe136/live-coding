@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
+
+const apiUrl = import.meta.env.VITE_API_URL;
+
+import Loader from "../components/Loader";
 //import { ingredients } from "../data/pizzas";
 const newPizza = {
   name: "",
@@ -8,10 +14,11 @@ const newPizza = {
   avaiable: false,
   ingredients: [],
 };
-const apiUrl = import.meta.env.VITE_API_URL;
+
 function AddPizza() {
   const [formData, setFormData] = useState(newPizza);
   const [ingredientList, setIngredientList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     //console.log("E' stato eseguito use effect");
@@ -20,11 +27,12 @@ function AddPizza() {
     //return () => console.log("cleanup");
   }, []);
 
+  const navigate = useNavigate();
   function getIngredients() {
     axios
       .get(apiUrl + "/ingredients")
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setIngredientList(res.data.data);
       })
       .catch((error) => {
@@ -58,98 +66,117 @@ function AddPizza() {
 
   function addPizza(e) {
     e.preventDefault();
+    setIsLoading(true);
     //no id ce lo rstituisce il backend
     //handleSubmit({ ...formData, id: self.crypto.randomUUID() });
-    axios.post(apiUrl + "/pizzas", formData).then((res) => {
-      console.log(res.data);
-    });
-    setFormData(newPizza);
+    axios
+      .post(apiUrl + "/pizzas", formData)
+      .then((res) => {
+        console.log(res.data.id);
+        const id = res.data.id;
+        setTimeout(() => {
+          setIsLoading(false);
+          navigate("/pizzas/" + id);
+        }, 3000);
+
+        //navigate("/pizzas");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        console.log("finally");
+        setIsLoading(false);
+      });
   }
   //
   return (
-    <section className="my-4 container">
-      <h2>Aggiungi nuova pizza</h2>
-      <form onSubmit={addPizza}>
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label">
-            Your name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            aria-describedby="namelHelp"
-            value={formData.name}
-            onChange={handleInput}
-            name="name"
-          />
-          <div id="namelHelp" className="form-text">
-            Scrivi il nome della pizza
-          </div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="image" className="form-label">
-            Immagine della pizza
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="image"
-            value={formData.image}
-            onChange={handleInput}
-            name="image"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="price" className="form-label">
-            Prezzo della pizza
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="price"
-            value={formData.price}
-            onChange={handleInput}
-            name="price"
-          />
-        </div>
-        <div className="card p-4">
-          {ingredientList.map((ingredient) => (
-            <div className="mb-3 form-check" key={ingredient.id}>
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="ingredients"
-                name="ingredients"
-                onChange={handleIngredients}
-                value={ingredient.title}
-                checked={formData.ingredients.includes(ingredient.title)}
-              />
-              <label className="form-check-label" htmlFor="avaiable">
-                {ingredient.title}
-              </label>
+    <>
+      {isLoading && <Loader />}
+      <section className="my-4 container">
+        <h2>Aggiungi nuova pizza</h2>
+        <form onSubmit={addPizza}>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Pizza name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              aria-describedby="namelHelp"
+              value={formData.name}
+              onChange={handleInput}
+              name="name"
+            />
+            <div id="namelHelp" className="form-text">
+              Scrivi il nome della pizza
             </div>
-          ))}
-        </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="avaiable"
-            name="avaiable"
-            onChange={handleInput}
-            value={formData.avaiable}
-            checked={formData.avaiable}
-          />
-          <label className="form-check-label" htmlFor="avaiable">
-            Disponibile
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-    </section>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="image" className="form-label">
+              Immagine della pizza
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="image"
+              value={formData.image}
+              onChange={handleInput}
+              name="image"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="price" className="form-label">
+              Prezzo della pizza
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="price"
+              value={formData.price}
+              onChange={handleInput}
+              name="price"
+            />
+          </div>
+          <div className="card p-4">
+            {ingredientList.map((ingredient) => (
+              <div className="mb-3 form-check" key={ingredient.id}>
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="ingredients"
+                  name="ingredients"
+                  onChange={handleIngredients}
+                  value={ingredient.title}
+                  checked={formData.ingredients.includes(ingredient.title)}
+                />
+                <label className="form-check-label" htmlFor="avaiable">
+                  {ingredient.title}
+                </label>
+              </div>
+            ))}
+          </div>
+          <div className="mb-3 form-check">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="avaiable"
+              name="avaiable"
+              onChange={handleInput}
+              value={formData.avaiable}
+              checked={formData.avaiable}
+            />
+            <label className="form-check-label" htmlFor="avaiable">
+              Disponibile
+            </label>
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </form>
+      </section>
+    </>
   );
 }
 
