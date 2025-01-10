@@ -1,5 +1,26 @@
 import { NavLink } from "react-router-dom";
+const navmenu = [
+  { path: "/", label: "Home" },
+  { path: "/pizzas", label: "Elenco pizze" },
+  { path: "/contact", label: "Contact Us" },
+  { path: "/about", label: "About" },
+];
 function HeaderComponent() {
+  function drawMenu() {
+    return navmenu.map((item) => (
+      <li className="nav-item" key={item.path}>
+        <NavLink
+          className="nav-link"
+          to={item.path}
+          style={({ isActive }) => ({
+            color: isActive ? "red" : "black",
+          })}
+        >
+          {item.label}
+        </NavLink>
+      </li>
+    ));
+  }
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -19,28 +40,7 @@ function HeaderComponent() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  Home
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/pizzas">
-                  Elenco pizze
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/contact">
-                  Contact Us
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/about">
-                  About
-                </NavLink>
-              </li>
-            </ul>
+            <ul className="navbar-nav">{drawMenu()}</ul>
           </div>
         </div>
       </nav>

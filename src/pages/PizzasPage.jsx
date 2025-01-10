@@ -52,7 +52,7 @@ function MainComponent() {
       .delete(apiUrl + "/pizzas/" + id)
       .then((res) => {
         console.log(res.data);
-        setMenu(menu.filter((el) => el.id !== id));
+        getData(search);
       })
       .catch((error) => {
         console.log(error);
