@@ -27,7 +27,7 @@ export default function PizzaPage() {
   }
 
   return (
-    <section className="container">
+    <section>
       <h1>Sono la pizza con id {id}</h1>
       {pizza && (
         <Card

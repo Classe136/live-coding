@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <section className="container">
+    <section>
       <h1>Sono About</h1>
     </section>
   );

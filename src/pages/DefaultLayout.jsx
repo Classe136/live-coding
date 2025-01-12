@@ -6,7 +6,7 @@ export default function DefaultLayout() {
   return (
     <div>
       <HeaderComponent />
-      <main>
+      <main className="container">
         <Outlet />
       </main>
 

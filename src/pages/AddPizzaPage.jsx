@@ -93,7 +93,7 @@ function AddPizza() {
   return (
     <>
       {isLoading && <Loader />}
-      <section className="my-4 container">
+      <section className="my-4">
         <h2>Aggiungi nuova pizza</h2>
         <form onSubmit={addPizza}>
           <div className="mb-3">

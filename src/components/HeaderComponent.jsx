@@ -7,19 +7,34 @@ const navmenu = [
 ];
 function HeaderComponent() {
   function drawMenu() {
-    return navmenu.map((item) => (
-      <li className="nav-item" key={item.path}>
-        <NavLink
-          className="nav-link"
-          to={item.path}
-          style={({ isActive }) => ({
-            color: isActive ? "red" : "black",
-          })}
-        >
-          {item.label}
-        </NavLink>
-      </li>
-    ));
+    return navmenu.map((item) =>
+      item.path === "/pizzas" ? (
+        <li className="nav-item" key={item.path}>
+          <NavLink
+            className="nav-link"
+            to={item.path}
+            end
+            style={({ isActive }) => ({
+              color: isActive ? "red" : "black",
+            })}
+          >
+            {item.label}
+          </NavLink>
+        </li>
+      ) : (
+        <li className="nav-item" key={item.path}>
+          <NavLink
+            className="nav-link"
+            to={item.path}
+            style={({ isActive }) => ({
+              color: isActive ? "red" : "black",
+            })}
+          >
+            {item.label}
+          </NavLink>
+        </li>
+      )
+    );
   }
   return (
     <header>

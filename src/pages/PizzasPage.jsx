@@ -66,7 +66,7 @@ function MainComponent() {
     setSearch(e.target.value);
   }
   return (
-    <section className="container">
+    <section className="container-fluid">
       <h1>Lista delle pizze</h1>
       <div className="row gy-4">
         <div className="col-12 py-4"></div>
