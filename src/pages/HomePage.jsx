@@ -56,6 +56,7 @@ export default function HomePage() {
       <section>
         <h3>Cats</h3>
         <Cat name={pet.name} image={pet.image} />
+        {/* quello ch viene passato al componente è un oggetto props={name: pet.name, image: pet.image} */}
         <Cat {...pet} />
         <Cat {...pet}>
           <div>La storia di questo gatto</div>
