@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
 const apiUrl = import.meta.env.VITE_API_URL;
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 import Loader from "../components/Loader";
 //import { ingredients } from "../data/pizzas";
@@ -17,31 +18,11 @@ const newPizza = {
 
 function AddPizza() {
   const [formData, setFormData] = useState(newPizza);
-  const [ingredientList, setIngredientList] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    //console.log("E' stato eseguito use effect");
-    getIngredients();
-
-    //return () => console.log("cleanup");
-  }, []);
-
+  const { setAlertData, ingredientList } = useGlobalContext();
   const navigate = useNavigate();
-  function getIngredients() {
-    axios
-      .get(apiUrl + "/ingredients")
-      .then((res) => {
-        //console.log(res.data);
-        setIngredientList(res.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        // always executed
-      });
-  }
+
   //mostrare funzione per ripassare oggetto verso il padre e tenere nel parent
   // solo l'array e la funzione submit
   function handleInput(e) {
@@ -74,10 +55,15 @@ function AddPizza() {
       .then((res) => {
         console.log(res.data.id);
         const id = res.data.id;
-        setTimeout(() => {
-          setIsLoading(false);
-          navigate("/pizzas/" + id);
-        }, 3000);
+        setAlertData({
+          type: "success",
+          message: `La pizza con id: ${id} è stata salvata`,
+        });
+        navigate("/pizzas");
+        // setTimeout(() => {
+        //   setIsLoading(false);
+        //   navigate("/pizzas");
+        // }, 3000);
 
         //navigate("/pizzas");
       })

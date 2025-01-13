@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import Cat from "../components/Cat";
 import Card from "../components/Card";
 import Carousel from "../components/Carousel";
 export default function HomePage() {
   const [isActive, setIsActive] = useState(0);
+
   const pet = {
     name: "Blanco",
     image: "/img/pets/blanco.jpg",
@@ -29,9 +30,14 @@ export default function HomePage() {
   return (
     <>
       <h1>Home page</h1>
-      <section>
+      {/* <ul>
+        {ingredientList.map((ingredient) => (
+          <li key={ingredient.id}>{ingredient.title}</li>
+        ))}
+      </ul> */}
+      {/*  <section>
         <h2>Cats</h2>
-
+      
         <Carousel onSlide={esegui}>
           {catsArray.map((pet, index) => (
             <div
@@ -52,19 +58,19 @@ export default function HomePage() {
             </div>
           ))}
         </Carousel>
-      </section>
-      <section>
+      </section>*/}
+      {/* <section>
         <h3>Cats</h3>
         <Cat name={pet.name} image={pet.image} />
-        {/* quello ch viene passato al componente è un oggetto props={name: pet.name, image: pet.image} */}
+       
         <Cat {...pet} />
         <Cat {...pet}>
           <div>La storia di questo gatto</div>
         </Cat>
         <Cat name={pet.name} image={pet.image}>
-          <div>La storia di questo gatto</div>
+          <p>La storia di questo gatto iin un</p>
         </Cat>
-      </section>
+      </section> */}
     </>
   );
 }

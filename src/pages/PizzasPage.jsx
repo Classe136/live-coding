@@ -9,7 +9,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 function MainComponent() {
   const [search, setSearch] = useState("");
-  const [menu, setMenu] = useState([]);
+  const [menu, setMenu] = useState([]); //[valore, funzione per modificare]
 
   useEffect(() => {
     //console.log("E' stato eseguito use effect");
