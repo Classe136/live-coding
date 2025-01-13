@@ -3,9 +3,8 @@ import axios from "axios";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const GlobalContext = createContext();
-
+const initialData = { type: "", message: "" };
 const GlobalProvider = ({ children }) => {
-  const initialData = { type: "", message: "" };
   const [alertData, setAlertData] = useState(initialData);
   const [ingredientList, setIngredientList] = useState([]);
   useEffect(() => {
@@ -13,6 +12,8 @@ const GlobalProvider = ({ children }) => {
     getIngredients();
     //return () => console.log("cleanup");
   }, []);
+  //console.log("E' stato eseguito use effect");
+
   function getIngredients() {
     axios
       .get(apiUrl + "/ingredients")
